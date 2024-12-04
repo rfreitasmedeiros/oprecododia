@@ -38,7 +38,7 @@ const useAuthStore =  create((set)=> ({
                   credentials: 'include' // Include cookies (e.g., accessToken) in the request
                 })
                 
-                const logarUsuarioData = await logarUsuario.json();
+                const logarUsuarioData = await logarUsuario.json()
 
                 if(logarUsuarioData.ok){
                   set({usuarioLogado: true, usuario: usuario, senha: senha, token: loginData.accessToken,
