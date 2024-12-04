@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { router } from "expo-router";
 import { Text, View, StyleSheet, Image, TouchableOpacity, TouchableHighlight, TextInput, Alert} from "react-native";
-import useAuthStore from "../Store/authStore";
+import useAuthStore from "../../Store/authStore";
 
 const home = () => {
 
