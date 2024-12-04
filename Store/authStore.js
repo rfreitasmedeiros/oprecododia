@@ -40,8 +40,10 @@ const useAuthStore =  create((set)=> ({
                 
                 const logarUsuarioData = await logarUsuario.json();
 
-                set({usuarioLogado: true, usuario: usuario, senha: senha, token: loginData.accessToken,
-                avatar: logarUsuarioData.avatar});
+                if(logarUsuarioData.ok){
+                  set({usuarioLogado: true, usuario: usuario, senha: senha, token: loginData.accessToken,
+                  avatar: logarUsuarioData.avatar});
+                }
 
               }
 
