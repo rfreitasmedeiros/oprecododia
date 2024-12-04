@@ -33,13 +33,16 @@ const useAuthStore =  create((set)=> ({
                 fetch('https://dummyjson.com/auth/me', {
                   method: 'GET',
                   headers: {
-                    'Authorization': 'Bearer /* YOUR_ACCESS_TOKEN_HERE */', // Pass JWT via Authorization header
+                    'Authorization': 'Bearer' + loginData.accessToken, // Pass JWT via Authorization header
                   }, 
                   credentials: 'include' // Include cookies (e.g., accessToken) in the request
                 })
                 
+                const logarUsuarioData = await logarUsuario.json();
 
-                set({usuarioLogado: true, usuario: usuario, senha: senha, token: loginData.accessToken});
+                set({usuarioLogado: true, usuario: usuario, senha: senha, token: loginData.accessToken,
+                avatar: logarUsuarioData.avatar});
+
               }
 
         }catch (error) {
