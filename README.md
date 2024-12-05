@@ -7,7 +7,7 @@
 4. Android Studio (https://developer.android.com/studio?hl=pt-br)
   - Baixe o programa, crie um AVD (Android Virtual Device) ou conecte seu celular no
     computador via cabo USB
-  - Com os arquivos abertos no vscode, abra o console e digite "npx expo start -c(esse -c é para limpar o cache)" 
+  - Com os arquivos abertos no vscode, abra o console e digite "npx expo start -c" (esse -c é para limpar o cache)
     e abra o expo-go no seu AVD ou no seu celular e execute o aplicativo.
 5. Expo-Go (https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&pli=1)
     - crie uma conta no "expo.dev", baixe o aplicativo "Expo-Go" e abra-o
