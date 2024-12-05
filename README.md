@@ -3,6 +3,7 @@
 - react native expo router (https://docs.expo.dev/router/installation/)
 - yarn (https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable)
 - zustand (https://zustand.docs.pmnd.rs/)
+- lucide (https://lucide.dev/guide/packages/lucide-react-native)
 3. Escolha como deseja acessar o aplicativo Android Studio ou Expo-Go
 4. Android Studio (https://developer.android.com/studio?hl=pt-br)
   - Baixe o programa, crie um AVD (Android Virtual Device) ou conecte seu celular no
