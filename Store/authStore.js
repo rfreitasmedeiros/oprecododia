@@ -21,39 +21,42 @@ const useAuthStore =  create((set)=> ({
                 credentials: 'include' // Include cookies (e.g., accessToken) in the request
               })
 
-              const loginData = await loginResponse.json()
-              console.log('loginData', loginData);
+              const loginData = await loginResponse.json();
 
-             // if (loginData.message != "" || loginData.message != undefined){
-             //   console.log('ERRO:',loginData.message);
-             //  set ({mensagemErro: `ocorreu um erro: ${loginData.message}`});
-             // }
+              if (loginResponse.ok && loginData.accessToken){
+                  set({ token: loginData.accessToken });
 
-              if (loginData.accessToken){
-                const logarUsuario = await /* providing accessToken in bearer */
-                fetch('https://dummyjson.com/auth/me', {
+                const logarUsuario = await fetch('https://dummyjson.com/auth/me', {
                   method: 'GET',
                   headers: {
-                    'Authorization': 'Bearer' + loginData.accessToken, // Pass JWT via Authorization header
+                    'Authorization': `Bearer ${loginData.accessToken}`,
                   }, 
-                  credentials: 'include' // Include cookies (e.g., accessToken) in the request
+                  credentials: 'include'
                 })
                 
                 const logarUsuarioData = await logarUsuario.json()
                 
-                if(logarUsuarioData.ok){
-                  set({usuarioLogado: true, usuario: usuario, senha: senha, token: loginData.accessToken,
-                  avatar: logarUsuarioData.avatar});
+                if(logarUsuario.ok && logarUsuarioData.usuario){
+                  set({usuarioLogado: true});
+                  set({usuario: usuario});
+                  set({senha: senha});
+                  set({token: loginData.accessToken});
+                  set({avatar: logarUsuarioData.avatar});
+                }else{
+                  throw new Error("Erro ao fazer login");
                 }
-
+              }else{
+                set({ mensagemErro: "Credenciais Inválidas"});
               }
 
         }catch (error) {
-
+          set({ mensagemErro: "Erro ao realizar login" + error.message});
         }
     },
-    logout: () => set({usuarioLogado: false, usuario: "", senha: "", token: ""}),
-
+    logout: () => {
+      set({usuarioLogado: false, usuario: "", senha: "", token: "", avatar: ""})
+    },
+    setErrorMessage: (message) => set({ errorMessage: message }),
 }));
     
 export default useAuthStore;
