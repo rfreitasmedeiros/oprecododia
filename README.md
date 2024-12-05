@@ -3,7 +3,7 @@
 - react native expo router (https://docs.expo.dev/router/installation/)
 - yarn (https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable)
 - zustand (https://zustand.docs.pmnd.rs/)
-3. Escolha como deseja acessar o aplicativo:
+3. Escolha como deseja acessar o aplicativo Android Studio ou Expo-Go
 3.1 Android Studio (https://developer.android.com/studio?hl=pt-br)
   - Baixe o programa, crie um AVD (Android Virtual Device) ou conecte seu celular no
     computador via cabo USB
