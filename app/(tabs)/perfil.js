@@ -1,8 +1,7 @@
 import React from "react";
-
+import { router } from "expo-router";
 import { Text, View, Image, TouchableHighlight} from "react-native";
 import useAuthStore from "../../Store/authStore";
-import { router } from "expo-router";
 
 export default function Perfil(){
 
@@ -31,3 +30,4 @@ export default function Perfil(){
        
     )
 }
+
