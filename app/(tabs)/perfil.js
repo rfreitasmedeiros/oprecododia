@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Text, View, StyleSheet, Image, TouchableOpacity, TouchableHighlight, TextInput} from "react-native";
+import { Text, View, Image, TouchableHighlight} from "react-native";
 import useAuthStore from "../../Store/authStore";
 import { router } from "expo-router";
 

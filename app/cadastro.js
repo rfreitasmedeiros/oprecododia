@@ -5,7 +5,7 @@ import { Text, View, StyleSheet, TouchableOpacity, TextInput} from "react-native
 const cadastro = () => {
 
     const salvar = () => {
-        router.replace('index');
+        router.replace('telaLogin');
     }
 
     return (

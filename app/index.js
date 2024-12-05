@@ -37,7 +37,7 @@ const home = () => {
             Alert.alert(mensagemErro);
         }
 
-        router.navigate('../(tabs)/perfil');
+        router.navigate('(tabs)/perfil');
     }
 
     const registrar = () => {
