@@ -16,8 +16,10 @@ export default function Perfil(){
             {
                 usuarioLogado ?(
                     <View>
-                        <Text style={{fontSize: 20}}>Perfil: //{usuario}//</Text>
-                        <Image style={{width: 300, height: 300,}} source={avatar}/>
+                        <Text style={{fontSize: 20}}>Perfil: {usuario}</Text>
+                        <View>
+                            <Image style={{width: 300, height: 300,}} source={avatar}/>
+                        </View>
                         <TouchableHighlight onPress={quitar}>
                             <Text style={{textDecorationLine: 'underline', color: 'blue'}}>Retornar</Text>
                         </TouchableHighlight>

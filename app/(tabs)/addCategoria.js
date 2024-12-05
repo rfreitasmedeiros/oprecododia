@@ -3,7 +3,7 @@ import { router } from "expo-router";
 import { Text, View, Image, TouchableHighlight} from "react-native";
 import { SearchBar } from "react-native-screens";
 
-const produtos = () => {
+const categoria = () => {
     return (
         <View>
             <Text>Ola mundo</Text>
@@ -12,4 +12,4 @@ const produtos = () => {
     )
 }
 
-export default produtos;
+export default categoria;

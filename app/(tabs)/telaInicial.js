@@ -2,14 +2,13 @@ import React from "react";
 import { router } from "expo-router";
 import { Text, View, StyleSheet, Image, TouchableOpacity, TouchableHighlight } from "react-native";
 import useAuthStore from "../../Store/authStore";
+import { SearchBar } from "react-native-screens";
 
 const inicio = () => {
 
     return (
         <View>
-            <View>
-                <Text style={{color: 'purple'}}>ola mundo</Text>
-            </View>
+            <Text>Ola Mundo</Text>
         </View>
     )
 }

@@ -14,49 +14,42 @@ const useAuthStore =  create((set)=> ({
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                  username: usuario, //'emilys',
-                  password: senha, //'emilyspass',
+                  username: usuario,
+                  password: senha, 
 
                 }),
-                credentials: 'include' // Include cookies (e.g., accessToken) in the request
+                credentials: 'include'
               })
 
               const loginData = await loginResponse.json();
+              console.log('loginData', loginData);
 
-              if (loginResponse.ok && loginData.accessToken){
-                  set({ token: loginData.accessToken });
-
+              if (loginData.accessToken){
                 const logarUsuario = await fetch('https://dummyjson.com/auth/me', {
                   method: 'GET',
                   headers: {
-                    'Authorization': `Bearer ${loginData.accessToken}`,
+                    'Authorization': `Bearer ${loginData.accessToken}`, 
                   }, 
                   credentials: 'include'
                 })
                 
-                const logarUsuarioData = await logarUsuario.json()
+                const logarUsuarioData = await logarUsuario.json();
+                console.log('logarUsuarioData', logarUsuarioData);
+
                 
-                if(logarUsuario.ok && logarUsuarioData.usuario){
-                  set({usuarioLogado: true});
-                  set({usuario: usuario});
-                  set({senha: senha});
-                  set({token: loginData.accessToken});
-                  set({avatar: logarUsuarioData.avatar});
-                }else{
-                  throw new Error("Erro ao fazer login");
+                if(logarUsuarioData && logarUsuario){
+                  set({usuarioLogado: true, usuario: usuario, senha: senha, token: loginData.accessToken,
+                  avatar: logarUsuarioData.avatar});
                 }
-              }else{
-                set({ mensagemErro: "Credenciais Inválidas"});
+
               }
 
         }catch (error) {
-          set({ mensagemErro: "Erro ao realizar login" + error.message});
+
         }
     },
-    logout: () => {
-      set({usuarioLogado: false, usuario: "", senha: "", token: "", avatar: ""})
-    },
-    setErrorMessage: (message) => set({ errorMessage: message }),
+    logout: () => set({usuarioLogado: false, usuario: "", senha: "", token: "", avatar: ""}),
+
 }));
     
 export default useAuthStore;
