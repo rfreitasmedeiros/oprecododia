@@ -21,6 +21,9 @@ const useAuthStore =  create((set)=> ({
                 credentials: 'include' // Include cookies (e.g., accessToken) in the request
               })
 
+              const loginData = await loginResponse.json()
+              console.log('loginData', loginData);
+
              // if (loginData.message != "" || loginData.message != undefined){
              //   console.log('ERRO:',loginData.message);
              //  set ({mensagemErro: `ocorreu um erro: ${loginData.message}`});
@@ -36,11 +39,8 @@ const useAuthStore =  create((set)=> ({
                   credentials: 'include' // Include cookies (e.g., accessToken) in the request
                 })
                 
-                const loginData = await loginResponse.json()
-                console.log('loginData', loginData);
                 const logarUsuarioData = await logarUsuario.json()
                 
-
                 if(logarUsuarioData.ok){
                   set({usuarioLogado: true, usuario: usuario, senha: senha, token: loginData.accessToken,
                   avatar: logarUsuarioData.avatar});

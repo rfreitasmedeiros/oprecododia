@@ -38,7 +38,7 @@ const home = () => {
         }
 
         if(usuarioLogado){
-            router.navigate('app/perfil');
+            router.navigate('perfil');
         }
     }
 
