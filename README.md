@@ -1,6 +1,7 @@
 1. baixar e desconpactar os arquivos
 2. ter instalado o node js e vscode e nele as bibliotecas: 
    - react native expo router (https://docs.expo.dev/router/installation/)
+     - baixar a extensão da camera: npx expo install expo-camera
    - yarn (https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable)
    - zustand (https://zustand.docs.pmnd.rs/)
    - lucide (https://lucide.dev/guide/packages/lucide-react-native)
