@@ -1,7 +1,7 @@
 import React from "react";
 import { router } from "expo-router";
 import { Text, View, Image, TouchableHighlight} from "react-native";
-import useAuthStore from "../../Store/authStore";
+import useAuthStore from "../../../Store/authStore";
 
 export default function Perfil(){
 
