@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from "react-native";
 
 export default function AddLocal() {
 
@@ -34,15 +34,26 @@ export default function AddLocal() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
+              nome: nome,
+              cep: cep,
+              logradouro: logradouro,
+              Nº: Nº,
+              bairro: bairro,
+              cidade: cidade,
+              estado: estado,
             }),
           });
+
+          const result = await response.json();
           
           if (!response.ok) {
-            throw new Error("Erro ao cadastrar o local");
+            console.error("Erro no servidor:", result);
+            throw new Error(result.message || "Erro ao cadastrar o local.");
+          } else {
+            Alert.alert("Sucesso", "Local cadastrado com sucesso!");
+          setLocal({nome: "", cep: "", logradouro: "", Nº: "", bairro: "", cidade: "", estado: "",});
           }
-    
-          Alert.alert("Sucesso", "Local cadastrado com sucesso!");
-          setLocal({nome: "", cep: "", logradouro: "",Nº: "",bairro: "",cidade: "", estado: "",});
+          
         } catch (error) {
           console.error(error);
           Alert.alert("Erro", "Não foi possível cadastrar o local.");
@@ -50,11 +61,11 @@ export default function AddLocal() {
       };
 
   return (
-    <View style={styles.container}>
-            <Text style={styles.titulo}>Adicionar Local</Text>
+    <View style={[styles.container]}>
+            <Text style={styles.titulo}>Adicionar Local</Text>]
 
             <View>
-                <Text style={styles.descricao}>Nome*:</Text>
+                <Text style={styles.descricao}>Nome:</Text>
                 <TextInput
                 style={styles.input}
                 value={local.nome}
@@ -141,8 +152,8 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     marginBottom: 10 },
   descricao: { 
-    fontSize: 16, 
-    marginVertical: 8 },
+    fontSize: 14, 
+    marginVertical: 12 },
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
