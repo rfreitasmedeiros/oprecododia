@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { Home, User, LayoutGrid, List, MapPin, AlignCenter} from "lucide-react-native";
+import { Home, User, LayoutGrid, List, MapPin } from "lucide-react-native";
 
 const TabLayout = () => {
     return (

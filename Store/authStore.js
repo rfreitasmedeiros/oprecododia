@@ -4,6 +4,9 @@ const useAuthStore =  create((set)=> ({
     usuarioLogado: false,
     usuario: "",
     senha: "",
+    email: "",
+    cpf: "",
+    telefone: "",
     token: "",
     mensagemErro: "",
     avatar: "",
@@ -15,7 +18,7 @@ const useAuthStore =  create((set)=> ({
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   username: usuario,
-                  password: senha, 
+                  password: senha,
 
                 }),
                 credentials: 'include'
@@ -37,9 +40,9 @@ const useAuthStore =  create((set)=> ({
                 console.log('logarUsuarioData', logarUsuarioData);
 
                 
-                if(logarUsuarioData && logarUsuario){
+                if(logarUsuario){
                   set({usuarioLogado: true, usuario: usuario, senha: senha, token: loginData.accessToken,
-                  avatar: logarUsuarioData.avatar});
+                  avatar: logarUsuario.image});
                 }
 
               }

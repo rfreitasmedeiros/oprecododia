@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { router } from "expo-router";
-import { Text, View, Image, TouchableHighlight} from "react-native";
-import { SearchBar } from "react-native-screens";
+import { Text, View, StyleSheet, TouchableHighlight} from "react-native";
+
 
 const categoria = () => {
     return (
         <View>
-            <Text>Ola mundo</Text>
-            <SearchBar></SearchBar>
+            <Text style={{textAlign: 'center',}}>Adicionar Categoria</Text>
         </View>
     )
 }

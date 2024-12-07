@@ -16,16 +16,24 @@ export default function Perfil(){
             {
                 usuarioLogado ?(
                     <View>
-                        <Text style={{fontSize: 20}}>Perfil: {usuario}</Text>
-                        <View>
-                            <Image style={{width: 300, height: 300,}} source={avatar}/>
+                        <View style={{width: 300, height: 300,}}>
+                            <Image source={(avatar)}/>
                         </View>
-                        <TouchableHighlight onPress={quitar}>
-                            <Text style={{textDecorationLine: 'underline', color: 'blue'}}>Retornar</Text>
+                        <Text style={{fontSize: 20}}>perfil: {usuario}</Text>
+                        <TouchableHighlight>
+                            <Text style={{textDecorationLine: 'underline', color: 'blue'}}>Editar Perfil</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight>
+                            <Text style={{textDecorationLine: 'underline', color: 'blue'}}>Notificações</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight>
+                            <Text style={{textDecorationLine: 'underline', color: 'blue'}}>Excluir minha conta</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight>
+                            <Text onPress={quitar} style={{textDecorationLine: 'underline', color: 'blue'}}>Sair</Text>
                         </TouchableHighlight>
                 </View>
                 ) : router.replace('telaLogin')
-
             }
 
         </>

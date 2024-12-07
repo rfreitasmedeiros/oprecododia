@@ -38,7 +38,7 @@ const home = () => {
         }
 
         if(usuarioLogado){
-            router.navigate('perfil');
+            router.navigate('telaInicial');
         }
     }
 
