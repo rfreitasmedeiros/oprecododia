@@ -5,7 +5,7 @@ import useAuthStore from "../../Store/authStore";
 
 export default function Perfil(){
 
-    const { usuario, usuarioLogado, logout, avatar } = useAuthStore();
+    const { usuario, usuarioLogado, logout} = useAuthStore();
 
     const quitar = () => {
         logout();
@@ -17,9 +17,9 @@ export default function Perfil(){
                 usuarioLogado ?(
                     <View>
                         <View style={{width: 300, height: 300,}}>
-                            <Image source={(avatar)}/>
+                            <Image style={{width: 100, height: 100, borderRadius: 360}} source={{uri: `https://dummyjson.com/auth/emilys/128`}}/>
                         </View>
-                        <Text style={{fontSize: 20}}>perfil: {usuario}</Text>
+                        <Text style={{fontSize: 20}}>"{usuario}"</Text>
                         <TouchableHighlight>
                             <Text style={{textDecorationLine: 'underline', color: 'blue'}}>Editar Perfil</Text>
                         </TouchableHighlight>

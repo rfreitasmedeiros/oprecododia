@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
+import addCategoria from "./addCategoria";
+import AddLocal from "./addLocal";
 import axios from "axios";
 
 export default function AddProduct() {
@@ -7,20 +9,6 @@ export default function AddProduct() {
   const [preco, setPreco] = useState("");
   const [categoria, setCategoria] = useState("");
   const [local, setLocal] = useState("");
-
-  const handleAddProduto = async () => {
-    try {
-      await fetch("https://api-produtos-6p7n.onrender.com/products", {
-        nome,
-        preco,
-        categoria,
-        local,
-      });
-      alert("Produto adicionado!");
-    } catch (error) {
-      alert("Erro ao adicionar o produto");
-    }
-  };
 
   return (
     <View style={styles.container}>

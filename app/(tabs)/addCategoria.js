@@ -1,34 +1,35 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
 export default function addCategoria() {
 
 
   const [categoria, setCategoria] = useState({
-    nome: ""
+    nome: "",
   });
 
   const addCategoria = async () => {
     try {
       const categoriaResponse = await fetch("https://api-produtos-9jmi.onrender.com/categories", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json"},
         body: JSON.stringify(categoria)
       });
 
       const categoriaData = await categoriaResponse.json();
-      console.log('categoriaData', categoriaData);
+      console.log('localData', categoriaData);
 
-      if (categoriaData.ok) {
-        alert("Categoria adicionada com sucesso!");
+      if (categoriaData) {
         setCategoria({nome: nome});
+        Alert.alert("Categoria adicionada com sucesso!");
       } else {
         const errorData = await categoriaResponse.json();
-        alert(errorData.message || "Erro ao adicionar a categoria.");
+        alert.Alert(errorData.message || "Erro ao adicionar a categoria");
       }
     } catch (error) {
 
     }
+    setCategoria({nome: ""});
   };
 
   return (
@@ -47,7 +48,6 @@ export default function addCategoria() {
       <TouchableOpacity style={styles.button} onPress={addCategoria}>
         <Text style={styles.textButton}>Salvar</Text>
       </TouchableOpacity>
-
     </View>
   );
 }

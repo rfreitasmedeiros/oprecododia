@@ -31,7 +31,7 @@ const [Local, SetLocal] = useState({
         Alert.alert("Local adicionado com sucesso!");
       } else {
         const errorData = await localResponse.json();
-        alert(errorData.message || "Erro ao adicionar local");
+        alert.Alert(errorData.message || "Erro ao adicionar local");
       }
     } catch (error) {
 

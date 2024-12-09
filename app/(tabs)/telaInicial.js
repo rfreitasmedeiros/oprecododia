@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, TextInput, FlatList} from "react-native";
+import { Text, View, Image, StyleSheet, TextInput, FlatList} from "react-native";
 import api from '../../services/api';
 import { SafeAreaView } from "react-native-web";
 
@@ -35,6 +35,7 @@ export default function TelaInicial() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.container}>
+            <Image style={styles.image} source={{uri:`https://api-produtos-9jmi.onrender.com/${produtos.Image}`}}/>
             <Text>Nome: {item.nome}</Text>
             <Text>Preço: R$ {item.preco}</Text>
             <Text>Endereço: {item.Location.nome} </Text>
@@ -48,7 +49,8 @@ export default function TelaInicial() {
   const styles = StyleSheet.create({
     container: { 
         flex: 1, 
-        padding: 16 
+        padding: 16, 
+        backgroundColor: "#fff"
     },
     input: { 
         borderWidth: 1, 
@@ -56,6 +58,10 @@ export default function TelaInicial() {
         padding: 8, 
         borderRadius: 20,
         borderColor: 'gray',
-        borderWidth: 1, }
-        
+        borderWidth: 1, 
+      },
+    image: {
+      width: 100,
+      height: 100,
+    },
   });
