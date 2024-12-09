@@ -35,7 +35,7 @@ export default function TelaInicial() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.container}>
-            <Image style={styles.image} source={{uri:`https://api-produtos-9jmi.onrender.com/${produtos.Image}`}}/>
+            <Image style={styles.image} source={{uri:`https://api-produtos-9jmi.onrender.com/${Image.produtos}`}}/>
             <Text>Nome: {item.nome}</Text>
             <Text>Preço: R$ {item.preco}</Text>
             <Text>Endereço: {item.Location.nome} </Text>

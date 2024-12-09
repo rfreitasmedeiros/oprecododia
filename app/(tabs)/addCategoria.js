@@ -17,7 +17,7 @@ export default function addCategoria() {
       });
 
       const categoriaData = await categoriaResponse.json();
-      console.log('localData', categoriaData);
+      console.log('categoriaData', categoriaData);
 
       if (categoriaData) {
         setCategoria({nome: nome});
@@ -93,5 +93,9 @@ const styles = StyleSheet.create({
 textButton: {
     color: 'white',
     fontSize: 20,
+},
+box: {
+  borderBottomWidth: StyleSheet.hairlineWidth,
+  width: "100%",
 },
 });

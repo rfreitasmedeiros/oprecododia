@@ -14,7 +14,7 @@ const [Local, SetLocal] = useState({
     estado: "",
   });
 
-  const addLocais = async  () => {
+  const addLocais = async () => {
     try {
       const localResponse = await fetch("https://api-produtos-9jmi.onrender.com/locations", {
         method: "POST",
