@@ -16,7 +16,7 @@ export default function AddProduct() {
       <TextInput placeholder="Preço" onChangeText={setPreco} style={styles.input} />
       <TextInput placeholder="Categoria" onChangeText={setCategoria} style={styles.input} />
       <TextInput placeholder="Localização" onChangeText={setLocal} style={styles.input} />
-      <Button title="Adicionar Produto" onPress={handleAddProduto} />
+      <Button title="Adicionar Produto"  />
     </View>
   );
 }

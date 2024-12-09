@@ -1,51 +1,52 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import api from '../../services/api';
+
 
 export default function addCategoria() {
 
 
-  const [categoria, setCategoria] = useState({
+  const [Categoria, SetCategoria] = useState({
     nome: "",
   });
 
-  const addCategoria = async () => {
+  const addCategorias = async () => {
     try {
       const categoriaResponse = await fetch("https://api-produtos-9jmi.onrender.com/categories", {
         method: "POST",
         headers: { "Content-Type": "application/json"},
-        body: JSON.stringify(categoria)
+        body: JSON.stringify(Categoria),
       });
 
       const categoriaData = await categoriaResponse.json();
       console.log('categoriaData', categoriaData);
 
-      if (categoriaData) {
-        setCategoria({nome: nome});
+      if (categoriaData){
+        SetCategoria({nome: nome});
         Alert.alert("Categoria adicionada com sucesso!");
-      } else {
-        const errorData = await categoriaResponse.json();
+      }else{
+        const errorData = await response.json();
         alert.Alert(errorData.message || "Erro ao adicionar a categoria");
       }
+      
     } catch (error) {
-
+      
     }
-    setCategoria({nome: ""});
+    SetCategoria({nome: ""});
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.box}>
         <Text style={styles.titulo}>Cadastrar Categoria</Text>
-      </View>
       
       <TextInput
         style={styles.input}
-        value={categoria.nome}
+        value={Categoria.nome}
         placeholder="Nome da categoria"
-        onChangeText={(text) => setCategoria({categoria, nome: text}) }
+        onChangeText={(text) => SetCategoria({ ...Categoria, nome: text}) }
       />
 
-      <TouchableOpacity style={styles.button} onPress={addCategoria}>
+      <TouchableOpacity style={styles.button} onPress={addCategorias}>
         <Text style={styles.textButton}>Salvar</Text>
       </TouchableOpacity>
     </View>
@@ -61,7 +62,6 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 24, 
     fontWeight: "bold", 
-    borderColor: "gray",
     marginBottom: 40,
     textAlign: "center",
   },
@@ -72,30 +72,17 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
   },
-  categoryItem: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-  },
-  categoryText: {
-    fontSize: 16,
-  },
   button: {
-    height: 60,
+    height: 50,
     width: 372,
     backgroundColor: '#14AE5C',
     padding: 10,
     borderRadius: 20,
     marginTop: 20,
-    alignItems: 'center',
-    justifyContent: 'center'
-},
-textButton: {
+  },
+  textButton: {
     color: 'white',
     fontSize: 20,
-},
-box: {
-  borderBottomWidth: StyleSheet.hairlineWidth,
-  width: "100%",
-},
+    textAlign: "center",
+  },
 });

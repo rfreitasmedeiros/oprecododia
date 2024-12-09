@@ -56,25 +56,33 @@ const home = () => {
                     <Text style={styles.textLogin}>Login</Text>
                 </View>
 
-                <View style={styles.box}>
-                    <TextInput
-                    style={styles.textBox}
-                    placeholder="Usuário"
-                    placeholderTextColor={'black'}
-                    autoCorrect={false}
-                    onChangeText={handleInputUsuario}
-                    value={usuario}/>
+                <View>
+                    <Text style={styles.texto}>Usuário</Text>
+                    <View style={styles.box}>
+                        <TextInput
+                        style={styles.textBox}
+                        placeholder="Usuário"
+                        placeholderTextColor={'black'}
+                        autoCorrect={false}
+                        onChangeText={handleInputUsuario}
+                        value={usuario}/>
+                    </View>
                 </View>
 
-                <View style={styles.box}>
-                    <TextInput style={styles.textBox}
-                    placeholder="Senha"
-                    placeholderTextColor={'black'}
-                    autoCorrect={false}
-                    onChangeText={handleInputSenha}
-                    value={senha}
-                    secureTextEntry={true}/>
+                <View>
+                    <Text style={styles.texto}>Senha</Text>
+                    <View style={styles.box}>
+                        <TextInput style={styles.textBox}
+                        placeholder="Senha"
+                        placeholderTextColor={'black'}
+                        autoCorrect={false}
+                        onChangeText={handleInputSenha}
+                        value={senha}
+                        secureTextEntry={true}/>
+                    </View>
                 </View>
+
+                    
 
                 <View>
                     <TouchableOpacity style={styles.buttonEntrar} onPress={logar}>
@@ -91,21 +99,17 @@ const home = () => {
     )
 }
 
-//configurações de design geral
 const styles = StyleSheet.create ({
-    //configurações da pagina
     container: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'space-evenly',
     },
-    //design da logo
     logo: {
         width: 300,
         height: 300,
     },
-    //design de login
     textLogin: {
         fontSize: 38.4,
         fontWeight: 'bold',
@@ -125,7 +129,6 @@ const styles = StyleSheet.create ({
         fontSize: 18,
         
     },
-    //design do botão ''Entrar''
     buttonEntrar: {
         height: 60,
         width: 372,
@@ -140,12 +143,15 @@ const styles = StyleSheet.create ({
         color: 'white',
         fontSize: 20,
     },
-    //design do botão ''Registrar''
     textButtonRegistrar:{
         fontSize: 20,
         fontWeight: 'bold',
         textDecorationLine: 'underline',
         color: '#007AFF',
+    },
+    texto: {
+        fontSize: 20,
+        margin: 10,
     }
 })
 

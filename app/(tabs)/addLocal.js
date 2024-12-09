@@ -19,7 +19,7 @@ const [Local, SetLocal] = useState({
       const localResponse = await fetch("https://api-produtos-9jmi.onrender.com/locations", {
         method: "POST",
         headers: { "Content-Type": "application/json"},
-        body: JSON.stringify(Local)
+        body: JSON.stringify(Local),
       });
 
       const localData = await localResponse.json();
@@ -128,8 +128,6 @@ const styles = StyleSheet.create({
     fontSize: 24, 
     fontWeight: "bold", 
     textAlign: "center",
-    borderBottomWidth: 1,
-    borderColor: "gray",
     marginBottom: 10 },
   descricao: { 
     fontSize: 14, 

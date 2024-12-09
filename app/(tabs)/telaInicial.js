@@ -7,20 +7,31 @@ export default function TelaInicial() {
     const [produtos, setProdutos] = useState([]);
     const [pesquisa, setPesquisa] = useState("");
   
-    useEffect(() => {
-      async function listarProdutos(){
-        const response = await api.get('/products');
-        setProdutos(response.data);
-      };
+      // Função para buscar produtos da API
+  const products = async () => {
+    try {
+      const response = await fetch("https://api-produtos-6p7n.onrender.com/products", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-      async function Pesquisa(){
-        const response = await api.get('/products/nome');
-        setPesquisa(response.data);
-      };
+      if (!produtosData) {
+        throw new Error("Erro ao buscar produtos");
+      }
 
-      listarProdutos();
-      Pesquisa();
-    }, []);
+      const produtosData = await response.json();
+      setProdutos(produtosData); // Salva a lista de produtos
+    } catch (error) {
+      console.error("Erro ao buscar produtos:", error.message);
+    }
+  };
+
+  // Chamada da API ao montar o componente
+  useEffect(() => {
+    products();
+  }, []);
   
     return (
       <View style={styles.container}>
@@ -35,7 +46,7 @@ export default function TelaInicial() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.container}>
-            <Image style={styles.image} source={{uri:`https://api-produtos-9jmi.onrender.com/${Image.produtos}`}}/>
+            <Image style={styles.image} source={{uri:`https://api-produtos-9jmi.onrender.com/products/${produtos.image}`}}/>
             <Text>Nome: {item.nome}</Text>
             <Text>Preço: R$ {item.preco}</Text>
             <Text>Endereço: {item.Location.nome} </Text>
@@ -61,7 +72,8 @@ export default function TelaInicial() {
         borderWidth: 1, 
       },
     image: {
-      width: 100,
-      height: 100,
+      position: 'absolute',
+      width: 30,
+      height: 30,
     },
   });
