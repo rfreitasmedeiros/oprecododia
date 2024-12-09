@@ -1,54 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, TextInput, FlatList} from "react-native";
-import axios from "axios";
+import api from '../../services/api';
+import { SafeAreaView } from "react-native-web";
 
-export default function Home() {
+export default function TelaInicial() {
     const [produtos, setProdutos] = useState([]);
     const [pesquisa, setPesquisa] = useState("");
   
     useEffect(() => {
-      listarProdutos();
-    }, []);
-  
-    const listarProdutos = async () => {
-      try {
-        const response = await fetch("https://api-produtos-6p7n.onrender.com/products");
+      async function listarProdutos(){
+        const response = await api.get('/products');
         setProdutos(response.data);
-      } catch (error) {
-        Alert.alert("Erro ao listar os produtos");
-      }
-    };
-  
-    const handlePesquisa = async () => {
-      if (!pesquisa) return listarProdutos();
-      try {
-        const response = await fetch(`https://api-produtos-6p7n.onrender.com/products/${search}`);
-        setProdutos([response.data]);
-      } catch (error) {
-        alert("Erro ao procurar pelo produto");
-      }
-    };
+      };
+
+      async function Pesquisa(){
+        const response = await api.get('/products/nome');
+        setPesquisa(response.data);
+      };
+
+      listarProdutos();
+      Pesquisa();
+    }, []);
   
     return (
       <View style={styles.container}>
-        <TextInput
-          placeholder="Pesquisar produtos"
-          onChangeText={setPesquisa}
-          onSubmitEditing={handlePesquisa}
-          style={styles.input}
-        />
-        <FlatList
-          data={produtos}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <View>
-              <Text>{item.nome}</Text>
-              <Text>{item.preco}</Text>
-              <Text>{item.endereco}</Text>
-              <Text>{item.usuario}</Text>
-            </View>
-          )}
-        />
+      <TextInput
+        data={pesquisa}
+        placeholder="Pesquisar produtos"
+        onChangeText={setPesquisa}
+        style={styles.input}
+      />
+      <FlatList
+        data={produtos}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.container}>
+            <Text>Nome: {item.nome}</Text>
+            <Text>Preço: R$ {item.preco}</Text>
+            <Text>Endereço: {item.Location.nome} </Text>
+          </View>
+        )}
+      />
       </View>
     );
   }

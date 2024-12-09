@@ -1,127 +1,97 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  FlatList,
-  Alert,
-  StyleSheet,
-} from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 
-export default function Categories() {
-  const [categoryName, setCategoryName] = useState(""); // Estado para o nome da categoria
-  const [categories, setCategories] = useState([]); // Estado para lista de categorias
+export default function addCategoria() {
 
-  // Função para buscar categorias existentes (GET)
-  const fetchCategories = async () => {
+
+  const [categoria, setCategoria] = useState({
+    nome: ""
+  });
+
+  const addCategoria = async () => {
     try {
-      const response = await fetch(
-        "https://api-produtos-6p7n.onrender.com/categories",
-        { method: "GET" }
-      );
+      const categoriaResponse = await fetch("https://api-produtos-9jmi.onrender.com/categories", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(categoria)
+      });
 
-      if (!response.ok) {
-        throw new Error("Erro ao carregar categorias.");
+      const categoriaData = await categoriaResponse.json();
+      console.log('categoriaData', categoriaData);
+
+      if (categoriaData.ok) {
+        alert("Categoria adicionada com sucesso!");
+        setCategoria({nome: nome});
+      } else {
+        const errorData = await categoriaResponse.json();
+        alert(errorData.message || "Erro ao adicionar a categoria.");
       }
-
-      const result = await response.json();
-      setCategories(result); // Atualiza as categorias no estado
     } catch (error) {
-      console.error(error);
-      Alert.alert("Erro", "Não foi possível carregar as categorias.");
+
     }
   };
-
-  // Função para cadastrar uma nova categoria (POST)
-  const handleSaveCategory = async () => {
-    if (!categoryName.trim()) {
-      Alert.alert("Erro", "O nome da categoria é obrigatório.");
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        "https://api-produtos-6p7n.onrender.com/categories",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name: categoryName }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Erro ao cadastrar a categoria.");
-      }
-
-      Alert.alert("Sucesso", "Categoria cadastrada com sucesso!");
-      setCategoryName(""); // Limpa o campo de entrada
-      fetchCategories(); // Atualiza a lista de categorias
-    } catch (error) {
-      console.error(error);
-      Alert.alert("Erro", "Não foi possível cadastrar a categoria.");
-    }
-  };
-
-  // Carregar as categorias quando o componente é montado
-  useEffect(() => {
-    fetchCategories();
-  }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cadastro de Categorias</Text>
-
-      {/* Campo de Nome */}
-      <Text style={styles.label}>Nome da Categoria:</Text>
+      <View style={styles.box}>
+        <Text style={styles.titulo}>Cadastrar Categoria</Text>
+      </View>
+      
       <TextInput
         style={styles.input}
-        value={categoryName}
-        onChangeText={setCategoryName}
-        placeholder="Digite o nome da categoria"
+        value={categoria.nome}
+        placeholder="Nome da categoria"
+        onChangeText={(text) => setCategoria({categoria, nome: text}) }
       />
 
-      {/* Botão de Salvar */}
-      <Button title="Salvar Categoria" onPress={handleSaveCategory} />
+      <TouchableOpacity style={styles.button} onPress={addCategoria}>
+        <Text style={styles.textButton}>Salvar</Text>
+      </TouchableOpacity>
 
-      {/* Lista de Categorias */}
-      <Text style={styles.listTitle}>Categorias Cadastradas:</Text>
-      <FlatList
-        data={categories}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.categoryItem}>
-            <Text style={styles.categoryText}>{item.name}</Text>
-          </View>
-        )}
-        ListEmptyComponent={
-          <Text style={styles.emptyText}>Nenhuma categoria cadastrada.</Text>
-        }
-      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: "#fff" },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 16 },
-  label: { fontSize: 16, marginVertical: 8 },
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#fff",
+  },
+  titulo: {
+    fontSize: 24, 
+    fontWeight: "bold", 
+    borderColor: "gray",
+    marginBottom: 40,
+    textAlign: "center",
+  },
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
-    padding: 8,
-    borderRadius: 4,
-    backgroundColor: "#f9f9f9",
-    marginBottom: 8,
+    borderRadius: 20,
+    padding: 10,
+    marginBottom: 10,
   },
-  listTitle: { fontSize: 18, fontWeight: "bold", marginTop: 16 },
   categoryItem: {
-    padding: 8,
+    padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
   },
-  categoryText: { fontSize: 16 },
-  emptyText: { fontSize: 16, fontStyle: "italic", textAlign: "center", marginTop: 16 },
+  categoryText: {
+    fontSize: 16,
+  },
+  button: {
+    height: 60,
+    width: 372,
+    backgroundColor: '#14AE5C',
+    padding: 10,
+    borderRadius: 20,
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
+},
+textButton: {
+    color: 'white',
+    fontSize: 20,
+},
 });

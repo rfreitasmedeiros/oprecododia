@@ -1,75 +1,54 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from "react-native";
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert} from "react-native";
+import api from '../../services/api';
 
 export default function AddLocal() {
 
-  const [local, setLocal] = useState({
+const [Local, SetLocal] = useState({
     nome: "",
     cep: "",
     logradouro: "",
-    Nº: "",
+    numero: "",
     bairro: "",
     cidade: "",
     estado: "",
   });
 
-    const handleSalvarLocal = async () => {
-        try {
-          if (
-            !local.nome ||
-             !local.cep ||
-              !local.logradouro ||
-               !local.Nº ||
-                !local.bairro ||
-                 !local.cidade ||
-                  !local.estado
-                ) {
-            Alert.alert("Erro", "Todos os campos são obrigatórios.");
-            return;
-          }
-    
-          const response = await fetch("https://api-produtos-6p7n.onrender.com/locations", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              nome: nome,
-              cep: cep,
-              logradouro: logradouro,
-              Nº: Nº,
-              bairro: bairro,
-              cidade: cidade,
-              estado: estado,
-            }),
-          });
+  const addLocais = async  () => {
+    try {
+      const localResponse = await fetch("https://api-produtos-9jmi.onrender.com/locations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(Local)
+      });
 
-          const result = await response.json();
-          
-          if (!response.ok) {
-            console.error("Erro no servidor:", result);
-            throw new Error(result.message || "Erro ao cadastrar o local.");
-          } else {
-            Alert.alert("Sucesso", "Local cadastrado com sucesso!");
-          setLocal({nome: "", cep: "", logradouro: "", Nº: "", bairro: "", cidade: "", estado: "",});
-          }
-          
-        } catch (error) {
-          console.error(error);
-          Alert.alert("Erro", "Não foi possível cadastrar o local.");
-        }
-      };
+      const localData = await localResponse.json();
+      console.log('localData', localData);
+
+      if (localData) {
+        SetLocal({nome: nome, cep: cep, logradouro: logradouro, numero: numero,
+        bairro: bairro, cidade: cidade, estado: estado });
+        Alert.alert("Local adicionado com sucesso!");
+      } else {
+        const errorData = await localResponse.json();
+        alert(errorData.message || "Erro ao adicionar local");
+      }
+    } catch (error) {
+
+    }
+    SetLocal({nome: "", cep: "", logradouro: "", numero: "", bairro: "", cidade: "", estado:"" });
+  };
 
   return (
     <View style={[styles.container]}>
-            <Text style={styles.titulo}>Adicionar Local</Text>]
+            <Text style={styles.titulo}>Adicionar Local</Text>
 
             <View>
                 <Text style={styles.descricao}>Nome:</Text>
                 <TextInput
                 style={styles.input}
-                value={local.nome}
-                onChangeText={(text) => setLocal({ ...local, nome: text })}
+                value={Local.nome}
+                onChangeText={(text) => SetLocal({ ...Local, nome: text })}
                 />
             </View>
       
@@ -77,9 +56,9 @@ export default function AddLocal() {
                 <Text style={styles.descricao}>CEP:</Text>
                 <TextInput
                     style={styles.input}
-                    value={local.cep}
+                    value={Local.cep}
                     keyboardType="numeric"
-                    onChangeText={(text) => setLocal({ ...local, cep: text })}
+                    onChangeText={(text) => SetLocal({ ...Local, cep: text })}
                 />
             </View>
 
@@ -87,8 +66,8 @@ export default function AddLocal() {
                 <Text style={styles.descricao}>Logradouro:</Text>
                 <TextInput
                     style={styles.input}
-                    value={local.logradouro}
-                    onChangeText={(text) => setLocal({ ...local, logradouro: text })}
+                    value={Local.logradouro}
+                    onChangeText={(text) => SetLocal({ ...Local, logradouro: text })}
                 />
             </View>
 
@@ -96,9 +75,9 @@ export default function AddLocal() {
                 <Text style={styles.descricao}>Nº:</Text>
                 <TextInput
                 style={styles.input}
-                value={local.Nº}
+                value={Local.numero}
                 keyboardType="numeric"
-                onChangeText={(text) => setLocal({ ...local, Nº: text })}
+                onChangeText={(text) => SetLocal({ ...Local, numero: text })}
             />
             </View>
 
@@ -106,8 +85,8 @@ export default function AddLocal() {
                 <Text style={styles.descricao}>Bairro:</Text>
                 <TextInput
                 style={styles.input}
-                value={local.bairro}
-                onChangeText={(text) => setLocal({ ...local, bairro: text })}
+                value={Local.bairro}
+                onChangeText={(text) => SetLocal({ ...Local, bairro: text })}
             />
             </View>
       
@@ -115,8 +94,8 @@ export default function AddLocal() {
                 <Text style={styles.descricao}>Cidade:</Text>
                 <TextInput
                 style={styles.input}
-                value={local.cidade}
-                onChangeText={(text) => setLocal({ ...local, cidade: text })}
+                value={Local.cidade}
+                onChangeText={(text) => SetLocal({ ...Local, cidade: text })}
             />
             </View>
       
@@ -124,13 +103,13 @@ export default function AddLocal() {
                 <Text style={styles.descricao}>Estado:</Text>
                 <TextInput
                  style={styles.input}
-                value={local.estado}
-                onChangeText={(text) => setLocal({ ...local, estado: text })}
+                value={Local.estado}
+                onChangeText={(text) => SetLocal({ ...Local, estado: text })}
                 />
             </View>
      
             <View>
-                <TouchableOpacity style={styles.buttonSalvar} onPress={handleSalvarLocal}>
+                <TouchableOpacity style={styles.buttonSalvar} onPress={addLocais}>
                     <Text style={styles.textButtonSalvar}>Salvar</Text>
                 </TouchableOpacity>
             </View>
@@ -143,7 +122,8 @@ const styles = StyleSheet.create({
     flex: 1, 
     padding: 16,
     backgroundColor: "#fff", 
-    justifyContent: 'space-evenly'},
+    justifyContent: 'space-evenly'
+  },
   titulo: { 
     fontSize: 24, 
     fontWeight: "bold", 
