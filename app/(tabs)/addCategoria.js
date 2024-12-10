@@ -12,7 +12,7 @@ export default function addCategoria() {
 
   const addCategorias = async () => {
     try {
-      const categoriaResponse = await fetch("https://api-produtos-9jmi.onrender.com/categories", {
+      const categoriaResponse = await fetch("https://api-produtos-9jmi.onrender.com/categories/add", {
         method: "POST",
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify(Categoria),
@@ -22,8 +22,8 @@ export default function addCategoria() {
       console.log('categoriaData', categoriaData);
 
       if (categoriaData){
-        SetCategoria({nome: nome});
         Alert.alert("Categoria adicionada com sucesso!");
+        SetCategoria({nome: nome});
       }else{
         const errorData = await response.json();
         alert.Alert(errorData.message || "Erro ao adicionar a categoria");
@@ -37,7 +37,7 @@ export default function addCategoria() {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.titulo}>Cadastrar Categoria</Text>
+        <Text style={styles.titulo}>Adicionar Categoria</Text>
       
       <TextInput
         style={styles.input}

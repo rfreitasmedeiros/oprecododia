@@ -47,6 +47,7 @@ const [Local, SetLocal] = useState({
                 <Text style={styles.descricao}>Nome:</Text>
                 <TextInput
                 style={styles.input}
+                placeholder="Nome do Local"
                 value={Local.nome}
                 onChangeText={(text) => SetLocal({ ...Local, nome: text })}
                 />
@@ -57,6 +58,7 @@ const [Local, SetLocal] = useState({
                 <TextInput
                     style={styles.input}
                     value={Local.cep}
+                    placeholder="CEP do Local"
                     keyboardType="numeric"
                     onChangeText={(text) => SetLocal({ ...Local, cep: text })}
                 />
@@ -66,6 +68,7 @@ const [Local, SetLocal] = useState({
                 <Text style={styles.descricao}>Logradouro:</Text>
                 <TextInput
                     style={styles.input}
+                    placeholder="Ex: Ruas, Avenidas, Praças, Jardins, Parques, Viadutos."
                     value={Local.logradouro}
                     onChangeText={(text) => SetLocal({ ...Local, logradouro: text })}
                 />
@@ -76,6 +79,7 @@ const [Local, SetLocal] = useState({
                 <TextInput
                 style={styles.input}
                 value={Local.numero}
+                placeholder="Ex: 999"
                 keyboardType="numeric"
                 onChangeText={(text) => SetLocal({ ...Local, numero: text })}
             />
@@ -85,6 +89,7 @@ const [Local, SetLocal] = useState({
                 <Text style={styles.descricao}>Bairro:</Text>
                 <TextInput
                 style={styles.input}
+                placeholder="Nome do Bairro"
                 value={Local.bairro}
                 onChangeText={(text) => SetLocal({ ...Local, bairro: text })}
             />
@@ -94,6 +99,7 @@ const [Local, SetLocal] = useState({
                 <Text style={styles.descricao}>Cidade:</Text>
                 <TextInput
                 style={styles.input}
+                placeholder="Nome da Cidade"
                 value={Local.cidade}
                 onChangeText={(text) => SetLocal({ ...Local, cidade: text })}
             />
@@ -103,6 +109,7 @@ const [Local, SetLocal] = useState({
                 <Text style={styles.descricao}>Estado:</Text>
                 <TextInput
                  style={styles.input}
+                 placeholder="Nome ou iniciais do Estado (Ex: AC, RJ, SP)"
                 value={Local.estado}
                 onChangeText={(text) => SetLocal({ ...Local, estado: text })}
                 />
@@ -138,12 +145,12 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 20,
     borderColor: 'gray',
-    borderWidth: 1,
+    borderWidth: 0.5,
     backgroundColor: "#f9f9f9",
     marginBottom: 8,
   },
   buttonSalvar: {
-    height: 60,
+    height: 50,
     width: 372,
     backgroundColor: '#14AE5C',
     padding: 10,
